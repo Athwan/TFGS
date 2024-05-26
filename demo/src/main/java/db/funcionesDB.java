@@ -9,10 +9,205 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import classes.*;
+import interfaceApp.Intermediario;
 
 public class funcionesDB {
 
+    private static SessionFactory sessionFactory;
+
+    // función para buscar por DNI
+    public boolean existePersonaPorDNI(String dni) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
+        EntityManager em = emf.createEntityManager();
+        
+        boolean existe = false;
+        
+        try {
+            em.getTransaction().begin();
+            // Buscar Persona por DNI
+            Persona persona = em.find(Persona.class, dni);
+            if (persona != null) {
+                existe = true;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+        
+        return existe;
+    }//existePersonaPorDNI
+
+    //	función para buscar intermediario
+    
+    public boolean existeIntermediario(String nombre) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
+        EntityManager em = emf.createEntityManager();
+        
+        boolean existe = false;
+        
+        try {
+            em.getTransaction().begin();
+            // Buscar Intermediario por nombre
+            TypedQuery<Intermediario> query = em.createQuery("SELECT i FROM Intermediario i WHERE i.nombre = :nombre", Intermediario.class);
+            query.setParameter("nombre", nombre);
+            Intermediario intermediario = null;
+            try {
+                intermediario = query.getSingleResult();
+            } catch (NoResultException e) {
+                // No se encontró ningún intermediario con el nombre dado
+            }
+
+            if (intermediario != null) {
+                existe = true;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+        
+        return existe;
+    }//existeIntermediario
+    
+    
+    public boolean existeTarifa(String tipo) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
+        EntityManager em = emf.createEntityManager();
+        
+        boolean existe = false;
+        
+        try {
+            em.getTransaction().begin();
+            // Buscar Tarifa por tipo
+            TypedQuery<Tarifa> query = em.createQuery("SELECT t FROM Tarifa t WHERE t.tipo = :tipo", Tarifa.class);
+            query.setParameter("tipo", tipo);
+            Tarifa tarifa = null;
+            try {
+                tarifa = query.getSingleResult();
+            } catch (NoResultException e) {
+                // No se encontró ninguna tarifa con el tipo dado
+            }
+
+            if (tarifa != null) {
+                existe = true;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+        
+        return existe;
+    }
+    
+    
+    // Función para encriptar una contraseña utilizando SHA-256
+    public static String encryptPassword(String password) {
+        try {
+            // Crear una instancia de MessageDigest para el algoritmo SHA-256
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            
+            // Aplicar el algoritmo de hash a la contraseña
+            byte[] hashedBytes = md.digest(password.getBytes());
+            
+            // Convertir los bytes hash a una representación hexadecimal
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }//
+	
+	
+    public boolean esDNICorrecto(String dni) {
+        // Comprueba si el DNI tiene 9 caracteres y el formato es correcto
+        if (dni == null || dni.length() != 9) {
+            return false;
+        }
+        
+        // Extrae la parte numérica y la letra
+        String numeroParte = dni.substring(0, 8);
+        char letraParte = dni.charAt(dni.length() - 1);
+        
+        // Verifica si la parte numérica es realmente un número
+        if (!numeroParte.matches("\\d+")) {
+            return false;
+        }
+        
+        // Cálculo de la letra correspondiente
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int numero = Integer.parseInt(numeroParte);
+        char letraCalculada = letras.charAt(numero % 23);
+        
+        // Compara la letra calculada con la letra proporcionada
+        return letraCalculada == letraParte;
+    }
+    
+    
+    public boolean existeApartamento(String ubicacion) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
+        EntityManager em = emf.createEntityManager();
+        
+        boolean existe = false;
+        
+        try {
+            em.getTransaction().begin();
+            // Buscar Tarifa por ubicación
+            TypedQuery<Apartamento> query = em.createQuery("SELECT a FROM Apartamento a WHERE a.ubicacion = :ubicacion", Apartamento.class);
+            query.setParameter("ubicacion", ubicacion);
+            Apartamento apartamento = null;
+            try {
+                apartamento = query.getSingleResult();
+            } catch (NoResultException e) {
+                // No se encontró ningún apartamento con la ubicación dada
+            }
+
+            if (apartamento != null) {
+                existe = true;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+        
+        return existe;
+    }
+	
+	
+							// INSERTS A DB
 	
 	public void insertarApartamento(String ubicacion)
 	{
@@ -247,98 +442,5 @@ public class funcionesDB {
 		em.getTransaction().commit();
 		em.close();
 		emf.close();
-    }
-
-    
-    
-    
-    
-    /*
-    public void insertarIngreso(String dniPersona, String nombreIntermediario, String ubicacionApartamento,
-            String tipoTarifa, int numCoches, int numPersonas, double descuento,
-            double totalIva, double totalFactura, String observaciones) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
-		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		
-		// Buscar la persona por DNI
-		TypedQuery<Persona> personaQuery = em.createQuery("SELECT p FROM Persona p WHERE p.DNI = :dni", Persona.class);
-		personaQuery.setParameter("dni", dniPersona);
-		Persona persona;
-		
-		try {
-			persona = personaQuery.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println("No se encontró ninguna persona con el DNI: " + dniPersona);
-			em.getTransaction().rollback();
-			em.close();
-			emf.close();
-			return;
-		}
-		
-		// Buscar el intermediario por nombre
-		TypedQuery<Intermediarios> intermediarioQuery = em.createQuery("SELECT i FROM Intermediarios i WHERE i.nombre = :nombre", Intermediarios.class);
-		intermediarioQuery.setParameter("nombre", nombreIntermediario);
-		Intermediarios intermediario;
-		try {
-			intermediario = intermediarioQuery.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println("No se encontró ningún intermediario con el nombre: " + nombreIntermediario);
-			em.getTransaction().rollback();
-			em.close();
-			emf.close();
-			return;
-		}
-		
-		// Buscar el apartamento por ubicación
-		TypedQuery<Apartamento> apartamentoQuery = em.createQuery("SELECT a FROM Apartamento a WHERE a.ubicacion = :ubicacion", Apartamento.class);
-		apartamentoQuery.setParameter("ubicacion", ubicacionApartamento);
-		Apartamento apartamento;
-		try {
-			apartamento = apartamentoQuery.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println("No se encontró ningún apartamento con la ubicación: " + ubicacionApartamento);
-			em.getTransaction().rollback();
-			em.close();
-			emf.close();
-			return;
-		}
-		
-		// Buscar la tarifa por tipo
-		TypedQuery<Tarifa> tarifaQuery = em.createQuery("SELECT t FROM Tarifa t WHERE t.tipo = :tipo", Tarifa.class);
-		tarifaQuery.setParameter("tipo", tipoTarifa);
-		Tarifa tarifa;
-		try {
-			tarifa = tarifaQuery.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println("No se encontró ninguna tarifa con el tipo: " + tipoTarifa);
-			em.getTransaction().rollback();
-			em.close();
-			emf.close();
-		return;
-		}
-		
-		// Crear el objeto Ingresos
-		Ingresos ingreso = new Ingresos();
-		ingreso.setPersona(persona);
-		ingreso.setIntermediario(intermediario);
-		ingreso.setApartamento(apartamento);
-		ingreso.setTarifa(tarifa);
-		ingreso.setFechaEntrada(new Date()); // Establecer la fecha de entrada como la fecha actual
-		ingreso.setNumCoches(numCoches);
-		ingreso.setNumPersonas(numPersonas);
-		ingreso.setDescuento(descuento);
-		ingreso.setTotalIva(totalIva);
-		ingreso.setTotalFactura(totalFactura);
-		ingreso.setObservaciones(observaciones);
-		
-		// Persistir el objeto Ingresos
-		em.persist(ingreso);
-		System.out.println("Ingreso insertado con ID: " + ingreso.getIdIngresos());
-		
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
-		}*/
+    }//insertarIngreso
 }//funciones DB

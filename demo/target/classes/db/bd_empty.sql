@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Persona` (
   `nombre` VARCHAR(45) NULL,
   `apellidos` VARCHAR(45) NULL,
   `telefono` INT NULL,
-  `password` VARCHAR(60) NULL,
+  `password` VARCHAR(100) NULL,
   PRIMARY KEY (`DNI`)
 ) ENGINE = InnoDB;
 
