@@ -126,6 +126,7 @@ public class Gastos extends JFrame {
                     		!gastoConcepto.isEmpty()))
                     {
                         dbFun.insertarGasto(ubicacion, iva, totalConIVA, totalGasto, nifProveedor, nombreProveedor, gastoConcepto, pagoCompletado);
+                        ListarGastosPanel.listarGastos();
                         dispose(); 
                     }
                     else	JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Error en ingreso de datos.", JOptionPane.ERROR_MESSAGE);

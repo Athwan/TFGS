@@ -168,10 +168,7 @@ public class LOGIN extends JFrame {
                 	}
                 	else JOptionPane.showMessageDialog(null, "Nombre de usuario incorrecto", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
 
-
                 }
-                
-                // Cerrar la ventana actual después de iniciar sesión
             }
         });
     }

@@ -51,7 +51,6 @@ public class VentanaPrincipal extends JFrame {
         	
             addButton(panelBotones, "Listar Ingresos y Total", e -> listarIngresos());
             addButton(panelBotones, "Listar Gastos y Total", e -> listarGastos());
-            addButton(panelBotones, "Calcular Resultado", e -> calcularResultado());
             addButton(panelBotones, "Liquidación Trimestral de IVA", e -> liquidacionIVA());
         }
 
@@ -138,11 +137,20 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void listarGastos() {
-        JOptionPane.showMessageDialog(this, "Listar Gastos y Total - Función no implementada aún.");
-    }
+    	   // Crear una instancia de ListarGastosPanel
+        ListarGastosPanel gastos = new ListarGastosPanel();
 
-    private void calcularResultado() {
-        JOptionPane.showMessageDialog(this, "Calcular Resultado - Función no implementada aún.");
+        // Agregar ListarGastosPanel al contenido de JFrame
+        getContentPane().removeAll(); // Limpiar contenido anterior
+        getContentPane().add(gastos, BorderLayout.CENTER);
+
+        // Validar y volver a dibujar JFrame
+        revalidate();
+        repaint();
+
+        // Hacer visible el JFrame
+        setVisible(true);
+        //JOptionPane.showMessageDialog(this, "Listar Gastos y Total - Función no implementada aún.");
     }
 
     private void liquidacionIVA() {
@@ -154,7 +162,7 @@ public class VentanaPrincipal extends JFrame {
             public void run() {
                 try {
                     // Cambiar "Usuario" por "Administrador" para probar la vista del administrador
-                    VentanaPrincipal frame = new VentanaPrincipal("Administrador");
+                    VentanaPrincipal frame = new VentanaPrincipal("Usuario");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -53,5 +53,7 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="com.miglayout.swing_11.3.0.jar"/>
+	<classpathentry kind="lib" path="com.miglayout.core_11.3.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
