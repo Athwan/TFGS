@@ -156,6 +156,8 @@ public class Ingreso extends JFrame {
                 // Si todos los campos están completos, registrar el ingreso
                 dbFun.insertarIngreso(personaDNI, intermediarioNombre, apartamentoUbicacion, tarifaTipo,
                         numCoches, numPersonas, descuento, totalIva, totalFactura, observaciones);
+                ListarIngresosPanel.listarIngresos();
+                dispose(); 
             }
         } catch (NumberFormatException e) {
             // Manejar el caso en que los campos de texto no sean números válidos

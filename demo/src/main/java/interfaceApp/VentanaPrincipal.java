@@ -133,7 +133,20 @@ public class VentanaPrincipal extends JFrame {
     
     
     private void listarIngresos() {
-        JOptionPane.showMessageDialog(this, "Listar Ingresos y Total - Función no implementada aún.");
+ 	   // Crear una instancia de ListarIngresosPanel
+     ListarIngresosPanel ingresos = new ListarIngresosPanel();
+
+     // Agregar ListarGastosPanel al contenido de JFrame
+     getContentPane().removeAll(); // Limpiar contenido anterior
+     getContentPane().add(ingresos, BorderLayout.CENTER);
+
+     // Validar y volver a dibujar JFrame
+     revalidate();
+     repaint();
+
+     // Hacer visible el JFrame
+     setVisible(true);
+     //JOptionPane.showMessageDialog(this, "Listar Ingresos y Total - Función no implementada aún.");
     }
 
     private void listarGastos() {
