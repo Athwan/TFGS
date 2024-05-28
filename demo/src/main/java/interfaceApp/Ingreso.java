@@ -153,6 +153,7 @@ public class Ingreso extends JFrame {
                     observaciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Te falta algún dato por completar.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
+            	
                 // Si todos los campos están completos, registrar el ingreso
                 dbFun.insertarIngreso(personaDNI, intermediarioNombre, apartamentoUbicacion, tarifaTipo,
                         numCoches, numPersonas, descuento, totalIva, totalFactura, observaciones);

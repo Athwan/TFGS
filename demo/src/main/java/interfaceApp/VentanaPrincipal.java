@@ -167,8 +167,22 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void liquidacionIVA() {
-        JOptionPane.showMessageDialog(this, "Liquidación Trimestral de IVA - Función no implementada aún.");
+        // Crear una instancia de CalculoIVATrimestralPanel
+        CalculoIVATrimestralPanel panelIVA = new CalculoIVATrimestralPanel();
+
+        // Agregar CalculoIVATrimestralPanel al contenido de JFrame
+        getContentPane().removeAll(); // Limpiar contenido anterior
+        getContentPane().add(panelIVA, BorderLayout.CENTER);
+
+        // Validar y volver a dibujar JFrame
+        revalidate();
+        repaint();
+
+        // Hacer visible el JFrame
+        setVisible(true);
+        // JOptionPane.showMessageDialog(this, "Liquidación Trimestral de IVA - Función no implementada aún.");
     }
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {

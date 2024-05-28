@@ -154,6 +154,18 @@ public class ListarGastosPanel extends JPanel {
         mainFrame.setVisible(true); // Mostrar la ventana principal
     }
     
+    /*
+     * 
+        // Botón para volver
+        JButton backButton = new JButton("Volver");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la ventana actual y cerrarla
+                showMainFrame();
+            }
+        });
+     */
     
     public static void listarGastos() {
         tableModel.setRowCount(0); // Limpiar la tabla
