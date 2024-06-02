@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Registro extends JFrame {
+public class UsuarioRegistro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtDNI;
@@ -19,7 +19,7 @@ public class Registro extends JFrame {
     private JPasswordField txtContrasena;
     private funcionesDB dbFun = new funcionesDB();
 
-    public Registro() {
+    public UsuarioRegistro() {
         setTitle("Registro de Usuario");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -99,7 +99,7 @@ public class Registro extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Registro frame = new Registro();
+                    UsuarioRegistro frame = new UsuarioRegistro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

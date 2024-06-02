@@ -8,32 +8,33 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Intermediario extends JFrame {
+public class IntermediarioRegistro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtNombre;
 	private funcionesDB dbFun = new funcionesDB();
 
-    public Intermediario() {
+    public IntermediarioRegistro() {
         setTitle("Registro de Intermediario");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 200);
+        setBounds(100, 100, 418, 200);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblNombre = new JLabel("Nombre del Intermediario:");
-        lblNombre.setBounds(5, 49, 207, 33);
+        JLabel lblNombre = new JLabel("Nombre del Intermediario");
+        lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNombre.setBounds(12, 56, 160, 33);
         contentPane.add(lblNombre);
 
         txtNombre = new JTextField();
-        txtNombre.setBounds(222, 49, 207, 33);
+        txtNombre.setBounds(179, 57, 207, 33);
         contentPane.add(txtNombre);
         txtNombre.setColumns(10);
 
         JButton btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setBounds(222, 100, 207, 22);
+        btnRegistrar.setBounds(93, 111, 207, 22);
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = txtNombre.getText();
@@ -54,7 +55,7 @@ public class Intermediario extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Intermediario frame = new Intermediario();
+                    IntermediarioRegistro frame = new IntermediarioRegistro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -140,7 +140,7 @@ public class ListarIngresosPanel extends JPanel {
 
     // Método para abrir la ventana para añadir un nuevo ingreso
     private void abrirVentanaAñadirIngreso() {
-        Ingreso ingreso = new Ingreso();
+        IngresoRegistro ingreso = new IngresoRegistro();
         ingreso.setVisible(true);
     }
     

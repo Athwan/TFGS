@@ -9,35 +9,36 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Apartamento extends JFrame {
+public class ApartamentoRegistro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtUbicacion;
     private funcionesDB dbFun;
 
-    public Apartamento() {
+    public ApartamentoRegistro() {
     	
         dbFun = new funcionesDB();
 
         setTitle("Registro de Apartamento");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 150);
+        setBounds(100, 100, 395, 179);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblUbicacion = new JLabel("Ubicación:");
-        lblUbicacion.setBounds(5, 49, 207, 33);
+        JLabel lblUbicacion = new JLabel("Ubicación");
+        lblUbicacion.setHorizontalAlignment(SwingConstants.CENTER);
+        lblUbicacion.setBounds(5, 50, 153, 33);
         contentPane.add(lblUbicacion);
 
         txtUbicacion = new JTextField();
-        txtUbicacion.setBounds(222, 49, 207, 33);
+        txtUbicacion.setBounds(155, 51, 207, 33);
         contentPane.add(txtUbicacion);
         txtUbicacion.setColumns(10);
 
         JButton btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setBounds(222, 92, 207, 22);
+        btnRegistrar.setBounds(85, 101, 207, 22);
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String ubicacion = txtUbicacion.getText();
@@ -58,7 +59,7 @@ public class Apartamento extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Apartamento frame = new Apartamento();
+                    ApartamentoRegistro frame = new ApartamentoRegistro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

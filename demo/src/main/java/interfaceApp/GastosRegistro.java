@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Gastos extends JFrame {
+public class GastosRegistro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtNombreApartamento;
@@ -24,86 +24,95 @@ public class Gastos extends JFrame {
     private funcionesDB dbFun;
     private JComboBox<String> ubicacionComboBox; // Agregar la caja desplegable
 
-    public Gastos() {
+    public GastosRegistro() {
     	
         dbFun = new funcionesDB();
 
         setTitle("Registro de Gastos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 600, 500);
+        setBounds(100, 100, 482, 421);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JLabel lblUbicacion = new JLabel("Ubicación:");
-        lblUbicacion.setBounds(5, 49, 207, 33);
+        JLabel lblUbicacion = new JLabel("Ubicación");
+        lblUbicacion.setHorizontalAlignment(SwingConstants.CENTER);
+        lblUbicacion.setBounds(5, 19, 211, 33);
         contentPane.add(lblUbicacion);
         
         ubicacionComboBox = new DesplegableApartamentoGasto(); // Crear la caja desplegable
-        ubicacionComboBox.setBounds(222, 49, 207, 33);
+        ubicacionComboBox.setBounds(220, 20, 207, 33);
         contentPane.add(ubicacionComboBox);
 
-        JLabel lblIVA = new JLabel("IVA:");
-        lblIVA.setBounds(5, 92, 207, 33);
+        JLabel lblIVA = new JLabel("IVA");
+        lblIVA.setHorizontalAlignment(SwingConstants.CENTER);
+        lblIVA.setBounds(5, 62, 207, 33);
         contentPane.add(lblIVA);
 
         txtIVA = new JTextField();
-        txtIVA.setBounds(222, 92, 207, 33);
+        txtIVA.setToolTipText("sólo el número de %");
+        txtIVA.setBounds(220, 63, 207, 33);
         contentPane.add(txtIVA);
         txtIVA.setColumns(10);
 
-        JLabel lblTotalConIVA = new JLabel("Total con IVA:");
-        lblTotalConIVA.setBounds(5, 135, 207, 33);
+        JLabel lblTotalConIVA = new JLabel("Total con IVA");
+        lblTotalConIVA.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTotalConIVA.setBounds(5, 105, 207, 33);
         contentPane.add(lblTotalConIVA);
 
         txtTotalConIVA = new JTextField();
-        txtTotalConIVA.setBounds(222, 135, 207, 33);
+        txtTotalConIVA.setBounds(220, 106, 207, 33);
         contentPane.add(txtTotalConIVA);
         txtTotalConIVA.setColumns(10);
 
-        JLabel lblTotalGasto = new JLabel("Total Gasto:");
-        lblTotalGasto.setBounds(5, 178, 207, 33);
+        JLabel lblTotalGasto = new JLabel("Total Gasto");
+        lblTotalGasto.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTotalGasto.setBounds(5, 148, 207, 33);
         contentPane.add(lblTotalGasto);
 
         txtTotalGasto = new JTextField();
-        txtTotalGasto.setBounds(222, 178, 207, 33);
+        txtTotalGasto.setBounds(220, 149, 207, 33);
         contentPane.add(txtTotalGasto);
         txtTotalGasto.setColumns(10);
 
-        JLabel lblNIFProveedor = new JLabel("NIF Proveedor:");
-        lblNIFProveedor.setBounds(5, 221, 207, 33);
+        JLabel lblNIFProveedor = new JLabel("NIF Proveedor");
+        lblNIFProveedor.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNIFProveedor.setBounds(5, 191, 207, 33);
         contentPane.add(lblNIFProveedor);
 
         txtNIFProveedor = new JTextField();
-        txtNIFProveedor.setBounds(222, 221, 207, 33);
+        txtNIFProveedor.setBounds(220, 192, 207, 33);
         contentPane.add(txtNIFProveedor);
         txtNIFProveedor.setColumns(10);
 
-        JLabel lblNombreProveedor = new JLabel("Nombre Proveedor:");
-        lblNombreProveedor.setBounds(5, 264, 207, 33);
+        JLabel lblNombreProveedor = new JLabel("Nombre Proveedor");
+        lblNombreProveedor.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNombreProveedor.setBounds(5, 234, 207, 33);
         contentPane.add(lblNombreProveedor);
 
         txtNombreProveedor = new JTextField();
-        txtNombreProveedor.setBounds(222, 264, 207, 33);
+        txtNombreProveedor.setBounds(220, 235, 207, 33);
         contentPane.add(txtNombreProveedor);
         txtNombreProveedor.setColumns(10);
 
-        JLabel lblGastoConcepto = new JLabel("Gasto Concepto:");
-        lblGastoConcepto.setBounds(5, 307, 207, 33);
+        JLabel lblGastoConcepto = new JLabel("Gasto Concepto");
+        lblGastoConcepto.setHorizontalAlignment(SwingConstants.CENTER);
+        lblGastoConcepto.setBounds(5, 277, 207, 33);
         contentPane.add(lblGastoConcepto);
 
         txtGastoConcepto = new JTextField();
-        txtGastoConcepto.setBounds(222, 307, 207, 33);
+        txtGastoConcepto.setBounds(220, 278, 207, 33);
         contentPane.add(txtGastoConcepto);
         txtGastoConcepto.setColumns(10);
 
         chckbxPagoCompletado = new JCheckBox("Pago Completado");
-        chckbxPagoCompletado.setBounds(222, 350, 207, 23);
+        chckbxPagoCompletado.setHorizontalAlignment(SwingConstants.CENTER);
+        chckbxPagoCompletado.setBounds(220, 320, 207, 23);
         contentPane.add(chckbxPagoCompletado);
 
         JButton btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setBounds(222, 378, 207, 22);
+        btnRegistrar.setBounds(220, 349, 207, 22);
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String ubicacion = (String) ubicacionComboBox.getSelectedItem(); // Obtener la ubicación seleccionada
@@ -126,8 +135,8 @@ public class Gastos extends JFrame {
                     		!gastoConcepto.isEmpty()))
                     {
                         dbFun.insertarGasto(ubicacion, iva, totalConIVA, totalGasto, nifProveedor, nombreProveedor, gastoConcepto, pagoCompletado);
-                        ListarGastosPanel.listarGastos();
                         dispose(); 
+                        ListarGastosPanel.listarGastos();
                     }
                     else	JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Error en ingreso de datos.", JOptionPane.ERROR_MESSAGE);
 
@@ -143,7 +152,7 @@ public class Gastos extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Gastos frame = new Gastos();
+                    GastosRegistro frame = new GastosRegistro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

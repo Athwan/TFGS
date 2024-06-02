@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2024 a las 14:52:31
+-- Tiempo de generación: 01-06-2024 a las 15:04:23
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -32,6 +32,13 @@ CREATE TABLE `apartamento` (
   `ubicacion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `apartamento`
+--
+
+INSERT INTO `apartamento` (`ID_Apartamento`, `ubicacion`) VALUES
+(1, 'Avenida Desengaño 21');
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +57,13 @@ CREATE TABLE `gastos` (
   `pagoCompletado` tinyint(4) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `gastos`
+--
+
+INSERT INTO `gastos` (`ID_Gastos`, `apartamentoID`, `iva`, `total_con_IVA`, `total_gasto`, `NIF_proveedor`, `nombre_proveedor`, `gasto_concepto`, `pagoCompletado`, `fecha`) VALUES
+(1, 1, 21, 1500, 1980, '98765432Z', 'José Viruta', 'un gasto muy importante', 1, '2024-06-01');
 
 -- --------------------------------------------------------
 
@@ -73,6 +87,14 @@ CREATE TABLE `ingresos` (
   `observaciones` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `ingresos`
+--
+
+INSERT INTO `ingresos` (`ID_Ingresos`, `Persona_DNI`, `intermediario`, `apartamento`, `tarifa`, `fecha_entrada`, `fecha_salida`, `num_coches`, `num_personas`, `descuento`, `total_iva`, `total_factura`, `observaciones`) VALUES
+(1, '12345678Z', 1, 1, 1, '2024-06-01', '2024-06-01', 1, 2, 10, 21, 2000, 'muy bonita la piscina'),
+(2, '12345678Z', 1, 1, 1, '2024-06-01', '2024-06-01', 3, 6, 21, 15, 3600, 'increible la pizzeria de abajo');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +105,13 @@ CREATE TABLE `intermediarios` (
   `ID_Intermediario` int(11) NOT NULL,
   `nombre_intermediario` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `intermediarios`
+--
+
+INSERT INTO `intermediarios` (`ID_Intermediario`, `nombre_intermediario`) VALUES
+(1, 'Copinsa SA');
 
 -- --------------------------------------------------------
 
@@ -98,6 +127,13 @@ CREATE TABLE `persona` (
   `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`DNI`, `nombre`, `apellidos`, `telefono`, `password`) VALUES
+('12345678Z', 'Usuario', 'De Prueba', 123123987, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +145,13 @@ CREATE TABLE `tarifa` (
   `tipo` varchar(45) DEFAULT NULL,
   `precio_base` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarifa`
+--
+
+INSERT INTO `tarifa` (`ID_Tarifa`, `tipo`, `precio_base`) VALUES
+(1, 'descuento verano romántico', 300);
 
 --
 -- Índices para tablas volcadas
@@ -163,31 +206,31 @@ ALTER TABLE `tarifa`
 -- AUTO_INCREMENT de la tabla `apartamento`
 --
 ALTER TABLE `apartamento`
-  MODIFY `ID_Apartamento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Apartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `gastos`
 --
 ALTER TABLE `gastos`
-  MODIFY `ID_Gastos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Gastos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ingresos`
 --
 ALTER TABLE `ingresos`
-  MODIFY `ID_Ingresos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Ingresos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `intermediarios`
 --
 ALTER TABLE `intermediarios`
-  MODIFY `ID_Intermediario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Intermediario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tarifa`
 --
 ALTER TABLE `tarifa`
-  MODIFY `ID_Tarifa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Tarifa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

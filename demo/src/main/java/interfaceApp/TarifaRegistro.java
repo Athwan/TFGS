@@ -8,18 +8,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Tarifa extends JFrame {
+public class TarifaRegistro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtTipo;
     private JTextField txtPrecioBase;
     private funcionesDB dbFun;
 
-    public Tarifa() {
+    public TarifaRegistro() {
     	
         dbFun = new funcionesDB();
 
-        setTitle("Registro de Propiedad");
+        setTitle("Registro de Tarifa");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 200);
         contentPane = new JPanel();
@@ -27,26 +27,29 @@ public class Tarifa extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblTipo = new JLabel("Tipo:");
-        lblTipo.setBounds(5, 49, 207, 33);
+        JLabel lblTipo = new JLabel("Tipo");
+        lblTipo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTipo.setBounds(25, 25, 123, 33);
         contentPane.add(lblTipo);
 
         txtTipo = new JTextField();
-        txtTipo.setBounds(222, 49, 207, 33);
+        txtTipo.setToolTipText("nombre de la tarifa");
+        txtTipo.setBounds(181, 25, 207, 33);
         contentPane.add(txtTipo);
         txtTipo.setColumns(10);
 
-        JLabel lblPrecioBase = new JLabel("Precio Base:");
-        lblPrecioBase.setBounds(5, 92, 207, 33);
+        JLabel lblPrecioBase = new JLabel("Precio Base");
+        lblPrecioBase.setHorizontalAlignment(SwingConstants.CENTER);
+        lblPrecioBase.setBounds(19, 64, 141, 33);
         contentPane.add(lblPrecioBase);
 
         txtPrecioBase = new JTextField();
-        txtPrecioBase.setBounds(222, 92, 207, 33);
+        txtPrecioBase.setBounds(181, 64, 207, 33);
         contentPane.add(txtPrecioBase);
         txtPrecioBase.setColumns(10);
 
         JButton btnRegistrar = new JButton("Registrar");
-        btnRegistrar.setBounds(222, 135, 207, 22);
+        btnRegistrar.setBounds(106, 108, 207, 22);
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String tipo = txtTipo.getText();
@@ -73,7 +76,7 @@ public class Tarifa extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Registro frame = new Registro();
+                    UsuarioRegistro frame = new UsuarioRegistro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

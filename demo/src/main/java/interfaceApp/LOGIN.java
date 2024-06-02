@@ -128,7 +128,7 @@ public class LOGIN extends JFrame {
         // Action Listeners
         btnRegistrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Registro registro = new Registro(); // Crear una instancia de la ventana de Registro
+                UsuarioRegistro registro = new UsuarioRegistro(); // Crear una instancia de la ventana de Registro
                 registro.setVisible(true); // Mostrar la ventana de Registro
             }
         });

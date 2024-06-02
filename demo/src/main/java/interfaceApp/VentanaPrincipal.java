@@ -52,6 +52,10 @@ public class VentanaPrincipal extends JFrame {
             addButton(panelBotones, "Listar Ingresos y Total", e -> listarIngresos());
             addButton(panelBotones, "Listar Gastos y Total", e -> listarGastos());
             addButton(panelBotones, "Liquidación Trimestral de IVA", e -> liquidacionIVA());
+            addButton(panelBotones, "Cancelar reserva", e -> cancelarReserva());
+            addButton(panelBotones, "Modificar apartamento", e -> modificarApartamento());
+
+
         }
 
 
@@ -84,7 +88,18 @@ public class VentanaPrincipal extends JFrame {
         panelBotones.setBackground(new Color(255, 255, 255));
     }
 
-    private void addButton(JPanel panel, String text, ActionListener actionListener) {
+    private void modificarApartamento() {
+    	ModificarApartamento modificar = new ModificarApartamento();
+    	modificar.setVisible(true);
+    	
+	}
+
+	private void cancelarReserva() {
+    	CancelarReserva cancelar = new CancelarReserva();
+    	cancelar.setVisible(true);
+	}
+
+	private void addButton(JPanel panel, String text, ActionListener actionListener) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 20));
         button.setBackground(new Color(51, 153, 255));
@@ -97,32 +112,32 @@ public class VentanaPrincipal extends JFrame {
     
     // Métodos para cada botón
     private void insertarApartamento() {
-    	Apartamento apartamento = new Apartamento();
+    	ApartamentoRegistro apartamento = new ApartamentoRegistro();
     	apartamento.setVisible(true);
     	//JOptionPane.showMessageDialog(this, "Insertar Apartamento - Función no implementada aún.");
     }
 
     private void insertarIntermediario() {
     	
-    	Intermediario intermediario = new Intermediario(); // Crear una instancia de la ventana de Registro
+    	IntermediarioRegistro intermediario = new IntermediarioRegistro(); // Crear una instancia de la ventana de Registro
     	intermediario.setVisible(true); // Mostrar la ventana de Registro
         //JOptionPane.showMessageDialog(this, "Insertar Intermediario - Función no implementada aún.");
     }
 
     private void insertarTarifa() {
-    	Tarifa tarifa = new Tarifa();
+    	TarifaRegistro tarifa = new TarifaRegistro();
     	tarifa.setVisible(true);
         //JOptionPane.showMessageDialog(this, "Insertar Tarifa - Función no implementada aún.");
     }
 
     private void insertarGasto() {
-    	Gastos gastos = new Gastos();
+    	GastosRegistro gastos = new GastosRegistro();
     	gastos.setVisible(true);
         //JOptionPane.showMessageDialog(this, "Insertar Gasto - Función no implementada aún.");
     }
 
     private void insertarIngreso() {
-    	Ingreso ingreso = new Ingreso();
+    	IngresoRegistro ingreso = new IngresoRegistro();
     	ingreso.setVisible(true);
         //JOptionPane.showMessageDialog(this, "Insertar Ingreso - Función no implementada aún.");
     }
@@ -188,8 +203,8 @@ public class VentanaPrincipal extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    // Cambiar "Usuario" por "Administrador" para probar la vista del administrador
-                    VentanaPrincipal frame = new VentanaPrincipal("Usuario");
+                    // Cambiar "Usuario" por "Administrador" para probar las vistas
+                    VentanaPrincipal frame = new VentanaPrincipal("Usuario*");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

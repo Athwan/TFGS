@@ -143,7 +143,7 @@ public class ListarGastosPanel extends JPanel {
     
     private void abrirVentanaAñadirGasto() {
         // Abrir la ventana para añadir un nuevo gasto
-        Gastos gastos = new Gastos();
+        GastosRegistro gastos = new GastosRegistro();
         gastos.setVisible(true);
     }
     

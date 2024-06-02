@@ -11,27 +11,16 @@ import org.hibernate.Session;
 
 import classes.*;
 import db.*;
+import interfaceApp.*;
 
 public class App {
     public static Session theSession = HibernateUtil.getSessionFactory().getCurrentSession();
 
     public static void main(String[] args)
     {        
-        funcionesDB dbFun = new funcionesDB();
-        
-        // PARA PONER A 0 EL AUTOINCREMENT
-        // ALTER TABLE `apartamento` AUTO_INCREMENT = 1; 
-        
-        String apartamento = "1ap2";
-        dbFun.insertarApartamento(apartamento);
-        dbFun.insertarPersona("12345678S", "Pancracio", "de los Palotes", 123123321, "1234");
-        dbFun.insertarIntermediario("Mano Manitas a domicilio");
-        dbFun.insertarTarifa("tarifa Verano Mix 2000", 600.0);
-        dbFun.insertarGasto(apartamento, 0.21, 180.0, 150.0, "12345678S", "Mi Proveedor", "Compra de materiales", true);
-        dbFun.insertarIngreso("12345678S", "Mano Manitas a domicilio", apartamento,
-        		"tarifa Verano Mix 2000", 2, 4, 0.1, 1500.0, 1800.0,
-        		"Observaciones de ingreso");
-
+    	LOGIN login = new LOGIN();
+    	login.setVisible(true);
+    	
     }//main
     
 }//mainClass

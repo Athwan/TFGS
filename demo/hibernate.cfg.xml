@@ -4,8 +4,8 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+    	<!-- Login-->
       <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-	  <property name="hibernate.connection.password">12345</property>
 	  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mydb</property>
 	  <property name="hibernate.connection.username">root</property>
 	  <property name="hibernate.connection.password"></property>
@@ -13,7 +13,8 @@
 	  <property name="hibernate.current_session_context_class">thread</property>
 	  <property name="hibernate.packageToScan">classes</property>
 	  <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
-	  <!-- Mapeo-->
+	  
+	  	<!-- Mapeo-->
 	  <mapping class="classes.Apartamento"/>
   	  <mapping class="classes.Gastos"/>
 	  <mapping class="classes.Ingresos"/>

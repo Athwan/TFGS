@@ -16,7 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import classes.*;
-import interfaceApp.Intermediario;
+import interfaceApp.IntermediarioRegistro;
 
 public class funcionesDB {
 
@@ -61,9 +61,9 @@ public class funcionesDB {
         try {
             em.getTransaction().begin();
             // Buscar Intermediario por nombre
-            TypedQuery<Intermediario> query = em.createQuery("SELECT i FROM Intermediario i WHERE i.nombre = :nombre", Intermediario.class);
+            TypedQuery<IntermediarioRegistro> query = em.createQuery("SELECT i FROM Intermediario i WHERE i.nombre = :nombre", IntermediarioRegistro.class);
             query.setParameter("nombre", nombre);
-            Intermediario intermediario = null;
+            IntermediarioRegistro intermediario = null;
             try {
                 intermediario = query.getSingleResult();
             } catch (NoResultException e) {
@@ -363,7 +363,7 @@ public class funcionesDB {
     }//insertarGasto
     
     public void insertarIngreso(String personaDNI, String intermediarioNombre, String apartamentoUbicacion, String tarifaTipo, 
-            int numCoches, int numPersonas, double descuento, double totalIva, double totalFactura, String observaciones) {
+            int numCoches, int numPersonas, double descuento, double totalIva, double totalFactura, String observaciones, Date entrada, Date salida) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestionalquileresPU");
 		EntityManager em = emf.createEntityManager();
 		
@@ -432,8 +432,8 @@ public class funcionesDB {
 		ingresos.setTotalIva(totalIva);
 		ingresos.setTotalFactura(totalFactura);
 		ingresos.setObservaciones(observaciones);
-		ingresos.setFechaEntrada(new Date());
-		ingresos.setFechaSalida(new Date());
+		ingresos.setFechaEntrada(entrada);
+		ingresos.setFechaSalida(salida);
 
 		// Persistir el objeto Ingresos
 		em.persist(ingresos);
